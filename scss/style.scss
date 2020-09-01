@@ -1,0 +1,199 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans JP", sans-serif;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+section {
+  padding: 7rem 0;
+}
+.hero {
+  --clr-accent: #faa700;
+}
+.show-white {
+  --clr-inner: #fce4b3;
+  --clr-outer: #eac886;
+  --clr-accent: #2f4858;
+}
+.show-blue {
+  --clr-inner: #6dd5ed;
+  --clr-outer: #2193b0;
+  --clr-accent: #2f4858;
+}
+.show-red {
+  --clr-inner: #faa700;
+  --clr-outer: #e48d00;
+  --clr-accent: #a1173c;
+}
+.container {
+  width: 85%;
+  max-width: 65rem;
+  margin: 0 auto;
+}
+// this adds a margin-top to all the child elements(that has a sibling before it) of the parent with class spacing
+.spacing * + * {
+  margin-top: var(--spacer, 1.5rem);
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.25rem;
+  background: var(--clr-accent, blue);
+  color: var(--clr-text, #fff);
+  font-weight: 700;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 250ms ease, opacity 250ms linear;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+    opacity: 0.9;
+  }
+}
+
+.hero {
+  text-align: center;
+  padding: 15rem 0;
+  color: #fff;
+  background: #222;
+  //if the browser does not support background-blend-mode the default background above will be displayed
+  @supports (background-blend-mode: multiply) {
+    background-image: url(../img/shoe-3.png), radial-gradient(#444, #1111);
+    background-blend-mode: multiply;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-size: clamp(3rem, calc(5vw + 1rem), 4.5rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.section-title {
+  text-align: center;
+  font-size: clamp(2.5rem, calc(5vw + 1rem), 4rem);
+  line-height: 1;
+  color: #17353d;
+  margin-bottom: 5rem;
+}
+
+.row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  & > * {
+    flex-basis: 30%;
+    min-width: 15rem;
+  }
+}
+
+.featured {
+  background: #eee;
+  &__item {
+    display: block;
+    position: relative;
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    transform: scale(0.85);
+    transition: transform 250ms ease;
+    line-height: 1.2;
+
+    &:hover,
+    &:focus {
+      transform: scale(1);
+
+      .featured__details {
+        opacity: 1;
+        text-shadow: 0 0 0.5rem rgba(#fff, 1);
+      }
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: -5%;
+      left: -5%;
+      // width: 200px;
+      padding: 100% 100% 0 0;
+      background: #2193b0;
+      border-radius: 50%;
+      z-index: -1;
+    }
+  }
+  &__details {
+    opacity: 0;
+    transition: opacity 250ms linear;
+    span {
+      display: block;
+      font-weight: 700;
+      font-size: 2rem;
+    }
+  }
+}
+.product {
+  background: radial-gradient(
+    var(--clr-inner, limegreen),
+    var(--clr-outer, purple)
+  );
+  padding: 3em;
+  border-radius: 3em;
+  margin-bottom: 3em;
+  text-align: center;
+  &__title {
+    text-transform: uppercase;
+    font-size: clamp(2rem, calc(5vw + 1rem), 5rem);
+    line-height: 1;
+    color: #fff;
+    text-shadow: 0 0 0.2em rgba($color: #000000, $alpha: 0.2);
+  }
+
+  &__img {
+    margin: -5em 0 0 0;
+  }
+}
+
+@media (min-width: 45em) {
+  .product {
+    text-align: left;
+    margin-bottom: 6rem;
+    &__title {
+      margin: 0;
+    }
+    &__img {
+      float: right;
+      width: 65%;
+      shape-outside: url(../img/shoe-1.png);
+      shape-margin: 2em;
+      margin: 0 -5em 0 0;
+    }
+    &.show-left {
+      .product__img {
+        float: left;
+        shape-outside: url(../dist/img/shoe-2.png);
+        margin: 0 0 0 -5em;
+        shape-margin: 2em;
+      }
+    }
+  }
+}
